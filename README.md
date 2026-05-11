@@ -5,7 +5,7 @@ A modern full-stack e-commerce application built with a FastAPI backend and a Vi
 ## 🚀 Features
 * Backend: FastAPI, SQLAlchemy (ORM), Pydantic schemas.
 * Frontend: React.js, Vite, Tailwind CSS.
-* Database: SQLite/PostgreSQL support.
+* Database: MYSQL/SQLite/PostgreSQL support.
 * Architecture: Modular structure with separate routes, models, and schemas.
 
 ---
