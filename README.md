@@ -49,7 +49,3 @@ uvicorn main:app --reload
 
 ---
 
-## 🔑 Environment Variables
-Create a .env file in the Backend folder:
-DATABASE_URL=sqlite:///./test.db
-SECRET_KEY=your_secret_key_here
