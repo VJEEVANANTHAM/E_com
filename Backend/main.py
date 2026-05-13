@@ -31,34 +31,25 @@ app.include_router(
     tags=["Products"]
 )
 
-#from fastapi import FastAPI, APIRouter
 
 
-# @
-# # Create FastAPI app
-# app = FastAPI()
 
-# # Create router
-# router = APIRouter(
-#     prefix="/employees",
-#     tags=["Employees"]
-# )
 
-# # Employee routes
-# @router.get("/")
-# async def home():
-#     return {"message": "Hello Employees"}
-# @router.get("/{employee_id}")
-# async def get_employee(employee_id: int):
-#     return {
-#         "employee_id": employee_id,
-#         "name": "Jeevan"
-#     }
 
-# # Include router in app
-# app.include_router(router)
+# from fastapi import FastAPI
+# from routes.practices import router as practices
+# from database import engine,Base
 
-# # Root route
+
+# app=FastAPI()
+
+# Base.metadata.create_all(bind=engine)
+
+# app.include_router(practices,prefix="/router")
+
 # @app.get("/")
-# async def root():
-#     return {"message": "Welcome to FastAPI"}
+# def home():
+#     return "this home page"
+
+
+
