@@ -1,51 +1,23 @@
-# E-Commerce Platform (E_com)
+You're just one step away from moving forward with micro1 for the Backend Engineer role. You can review the role here.
 
-A modern full-stack e-commerce application built with a FastAPI backend and a Vite + React frontend.
+Your next step is to complete your AI interview with our AI recruiter. It's a conversational way for us to understand your experience, motivation, and fit for the role.
 
-## 🚀 Features
-* Backend: FastAPI, SQLAlchemy (ORM), Pydantic schemas.
-* Frontend: React.js, Vite, Tailwind CSS.
-* Database: MYSQL/SQLite/PostgreSQL support.
-* Architecture: Modular structure with separate routes, models, and schemas.
 
----
+Here's what to expect:
 
-## 🛠️ Project Structure
-E_com/
-├── Backend/          # FastAPI Source Code
-│   ├── curd/         # CRUD operations
-│   ├── models/       # SQLAlchemy database models
-│   ├── routes/       # API endpoints
-│   ├── schemas/      # Pydantic data validation
-│   ├── database.py   # DB connection config
-│   └── main.py       # Entry point
-├── Frontend/         # React + Vite Source Code
-│   ├── src/          # Components and logic
-│   └── public/       # Static assets
-└── .gitignore        # Files to ignore
+Format: AI Interview + Coding Exercise
+Estimated duration: up to 43 minutes
+Focus areas: Backend programming, API design & Microservices, Databases & Data Modeling (SQL + NoSQL)
+Last date to complete: Jun 05, 2026 05:24 am
 
----
+If you'd like to prep, you can check our AI Interview Guide.
 
-## ⚙️ Setup Instructions
 
-### 1. Backend Setup (FastAPI)
-Navigate to the backend directory and set up a virtual environment:
-1. cd Backend
-2. python -m venv .venv
-3. Activation:
-   - Windows: .\venv\Scripts\activate
-   - Mac/Linux: source .venv/bin/activate
-4. pip install -r requirements.txt
+Before you begin
 
-Run the server:
-uvicorn main:app --reload
+Find a quiet space with good and stable internet
+Use a laptop/desktop for the best experience
+Allow microphone and camera access when prompted
+Be ready to share your screen
 
----
-
-### 2. Frontend Setup (React + Vite)
-1. cd Frontend
-2. npm install
-3. npm run dev
-
----
-
+When you're ready, start your AI interview her
