@@ -6,9 +6,11 @@ const CartContext = createContext(null);
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [cartCount, setCartCount] = useState(0);
+  const [cartLoading, setCartLoading] = useState(false);
 
   // ── Fetch Cart ─────────────────────────────────────
   const fetchCart = useCallback(async () => {
+    setCartLoading(true);
     try {
       const { data } = await api.get("/cart");
       setCart(data.items || []);
@@ -17,6 +19,10 @@ export const CartProvider = ({ children }) => {
       );
     } catch (err) {
       console.error("Fetch cart error:", err.message);
+      setCart([]);
+      setCartCount(0);
+    } finally {
+      setCartLoading(false);
     }
   }, []);
 
@@ -30,7 +36,10 @@ export const CartProvider = ({ children }) => {
       );
       return { success: true };
     } catch (err) {
-      return { success: false, message: err.response?.data?.message };
+      return {
+        success: false,
+        message: err.response?.data?.message || err.response?.data?.detail,
+      };
     }
   }, []);
 
@@ -60,7 +69,7 @@ export const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{ cart, cartCount, fetchCart, addToCart, removeFromCart, clearCart }}
+      value={{ cart, cartCount, cartLoading, fetchCart, addToCart, removeFromCart, clearCart }}
     >
       {children}
     </CartContext.Provider>

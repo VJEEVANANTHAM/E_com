@@ -40,3 +40,13 @@ class Signup(BaseModel):
 
         return self
     
+
+
+
+class Update_Profile(BaseModel):
+    username: str
+    email: EmailStr
+
+class Update_password(BaseModel):
+    currentPassword: str
+    newPassword: str

@@ -9,4 +9,4 @@ class User(Base):
     id=Column(Integer,primary_key=True,index=True)
     full_name=Column(String(30),nullable=False)
     email=Column(String(40),unique=True,index=True)
-    password=Column(String(225),nullable=False)
+    password=Column(String(30),nullable=False)

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {
   Card, CardMedia, CardContent, CardActions,
-  Typography, Button, Box, Chip, Snackbar, Alert,
+  Typography, Button, Box, Chip, Snackbar, Alert, CircularProgress,
 } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import StarIcon from "@mui/icons-material/Star";
@@ -67,7 +67,7 @@ const ProductCard = ({ product }) => {
           height="200"
           image={product.image}
           alt={product.name}
-          on Click={() => navigate(`/products/${product._id}`)}
+          onClick={() => navigate(`/products/${product._id}`)}
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = `https://placehold.co/300x200/e8f5e9/00a278?text=${encodeURIComponent(product.name)}`;

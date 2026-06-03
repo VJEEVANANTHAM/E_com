@@ -94,7 +94,7 @@ const Profile = () => {
 
     setProfileLoading(true);
     try {
-      const { data } = await api.put("/auth/profile", {
+      const { data } = await api.put("/profile", {
         username: profileData.username,
         email: profileData.email,
       });
@@ -136,7 +136,7 @@ const Profile = () => {
 
     setPasswordLoading(true);
     try {
-      await api.put("/auth/profile", {
+      await api.put("/update_password", {
         currentPassword: passwordData.currentPassword,
         newPassword: passwordData.newPassword,
       });

@@ -14,7 +14,7 @@ import { useAuth } from "../context/AuthContext";
 import api from "../utils/api";
 
 const Cart = () => {
-  const { cart, fetchCart, removeFromCart, cartCount } = useCart();
+  const { cart, fetchCart, removeFromCart, cartCount, cartLoading } = useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -47,6 +47,17 @@ const Cart = () => {
   const total = cart.reduce((sum, item) => {
     return sum + item.product.price * item.quantity;
   }, 0);
+
+  if (cartLoading) {
+    return (
+      <Box sx={{ minHeight: "100vh", bgcolor: "grey.50" }}>
+        <Navbar />
+        <Box textAlign="center" py={8}>
+          <CircularProgress color="primary" />
+        </Box>
+      </Box>
+    );
+  }
 
   // ── Empty cart ─────────────────────────────────────
   if (cart.length === 0) {

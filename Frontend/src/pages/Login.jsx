@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box, Container, TextField, Button, Typography,
   Alert, InputAdornment, IconButton, CircularProgress, Link,
@@ -56,15 +56,17 @@ const Login = () => {
 
     setLoading(true);
     try {
-      const { data } = await api.post("/auth/login", {
+      const { data } = await api.post("/Login", {
         email: formData.email,
         password: formData.password,
       });
+      // console.log(data.full_name)
+    localStorage.setItem('full_name', JSON.stringify(data.full_name));
 
-      // Store user in context + localStorage
+    // Store user in context + localStorage
       login({
         _id: data._id,
-        username: data.username,
+        username: data.full_name,
         email: data.email,
         balance: data.balance,
         isAdmin: data.isAdmin,

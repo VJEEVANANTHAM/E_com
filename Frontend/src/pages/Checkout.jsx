@@ -16,6 +16,7 @@ const Checkout = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [address, setAddress] = useState({
     street: "",
     city: "",
@@ -52,6 +53,7 @@ const Checkout = () => {
   // ── Handle Payment ─────────────────────────────────
   const handlePayment = async () => {
     setError("");
+    setSuccess("");
 
     const errors = validateAddress();
     if (Object.keys(errors).length > 0) {
@@ -67,60 +69,20 @@ const Checkout = () => {
     setLoading(true);
 
     try {
-      // Step 1: Create Razorpay order
-      const { data } = await api.post("/orders/create-payment", {
-        amount: total,
+      await api.post("/orders/dummy-payment", {
+        shippingAddress: address,
       });
 
-      // Step 2: Open Razorpay checkout
-      console.log("Razorpay Key:", import.meta.env.VITE_RAZORPAY_KEY_ID);
-      const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_test_ScX0kszDUxhD0H",
-        
-        amount: data.amount,
-        currency: data.currency,
-        name: "QKart",
-        description: "QKart Purchase",
-        order_id: data.orderId,
-        handler: async (response) => {
-          try {
-            // Step 3: Verify payment and place order
-            await api.post("/orders/verify-payment", {
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature,
-              shippingAddress: address,
-            });
-
-            await clearCart();
-            navigate("/orders");
-          } catch (err) {
-            setError("Payment verification failed. Contact support.");
-            setLoading(false);
-          }
-        },
-        prefill: {
-          name: user?.username || "",
-          email: user?.email || "",
-        },
-        theme: {
-          color: "#00a278",
-        },
-        modal: {
-          ondismiss: () => {
-            setLoading(false);
-            setError("Payment cancelled. Try again.");
-          },
-        },
-      };
-
-      const razorpayWindow = new window.Razorpay(options);
-      razorpayWindow.open();
-
+      await clearCart();
+      setSuccess("Payment done. Order placed successfully.");
+      setTimeout(() => navigate("/orders"), 1000);
     } catch (err) {
       setError(
-        err.response?.data?.message || "Payment failed. Try again."
+        err.response?.data?.message ||
+        err.response?.data?.detail ||
+        "Payment failed. Try again."
       );
+    } finally {
       setLoading(false);
     }
   };
@@ -137,6 +99,11 @@ const Checkout = () => {
         {error && (
           <Alert severity="error" sx={{ mb: 3 }}>
             {error}
+          </Alert>
+        )}
+        {success && (
+          <Alert severity="success" sx={{ mb: 3 }}>
+            {success}
           </Alert>
         )}
 

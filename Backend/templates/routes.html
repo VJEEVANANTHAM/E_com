@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Routes</title>
+    <style>
+        :root {
+            color-scheme: light;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f6f7f9;
+            color: #17202a;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        main {
+            width: min(1100px, calc(100% - 32px));
+            margin: 40px auto;
+        }
+
+        header {
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        p {
+            margin: 0;
+            color: #5d6d7e;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff;
+            border: 1px solid #dfe4ea;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #edf1f5;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #eef2f6;
+            font-size: 13px;
+            letter-spacing: 0;
+            text-transform: uppercase;
+            color: #405266;
+        }
+
+        tr:last-child td {
+            border-bottom: 0;
+        }
+
+        code {
+            font-family: Consolas, Monaco, monospace;
+            font-size: 14px;
+        }
+
+        .method {
+            display: inline-block;
+            min-width: 54px;
+            margin: 0 6px 6px 0;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: #e8f3ff;
+            color: #155a9c;
+            font-size: 12px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .empty {
+            color: #7b8794;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Backend Routes</h1>
+            <p>Registered FastAPI endpoints for this application.</p>
+        </header>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Methods</th>
+                    <th>Path</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for route in routes %}
+                <tr>
+                    <td>
+                        {% if route.methods %}
+                            {% for method in route.methods %}
+                            <span class="method">{{ method }}</span>
+                            {% endfor %}
+                        {% else %}
+                            <span class="empty">-</span>
+                        {% endif %}
+                    </td>
+                    <td><code>{{ route.path }}</code></td>
+                    <td>{{ route.name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

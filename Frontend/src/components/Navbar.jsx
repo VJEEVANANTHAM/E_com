@@ -15,7 +15,7 @@ const Navbar = () => {
   const { cartCount, fetchCart } = useCart();
   const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = useState(false);
-
+  const [Username, setUsername] = useState("")
   useEffect(() => {
     if (user) fetchCart();
   }, [user]);
@@ -24,7 +24,14 @@ const Navbar = () => {
     logout();
     navigate("/login");
   };
+  useEffect(() => {
+  // CORRECT: This strips the quotes and returns a clean string
+const name = JSON.parse(localStorage.getItem('full_name')); 
 
+   setUsername(name)
+    // {console.log()}
+    // setUsername(savedUser)
+  }, [])
   // ── Mobile Drawer ──────────────────────────────────
   const drawer = (
     <Box sx={{ width: 250 }}>
@@ -46,6 +53,7 @@ const Navbar = () => {
                   primary={user.username || user.email}
                   secondary="Logged in"
                 />
+
               </ListItemButton>
             </ListItem>
 
@@ -60,7 +68,6 @@ const Navbar = () => {
                 <ListItemText primary="My Cart" />
               </ListItemButton>
             </ListItem>
-
             {/* Profile */}
             <ListItem disablePadding>
               <ListItemButton
@@ -89,7 +96,7 @@ const Navbar = () => {
                   onClick={() => setDrawerOpen(false)}
                 >
                   <ListItemText primary="Admin Dashboard"
-                  primaryTypographyProps={{  color:"primary",fontWeight: 700 }} 
+                    primaryTypographyProps={{ color: "primary", fontWeight: 700 }}
                   />
                 </ListItemButton>
               </ListItem>
@@ -161,7 +168,8 @@ const Navbar = () => {
             {user ? (
               <>
                 <Typography variant="body2" color="text.secondary" sx={{ mr: 1 }}>
-                  Hi, {user.username || user.email}
+                      {/* <p>{Username}</p> */}
+
                 </Typography>
 
                 <Button
@@ -169,7 +177,7 @@ const Navbar = () => {
                   color="primary"
                   sx={{ borderRadius: 2 }}
                 >
-                  Profile
+                  {Username}
                 </Button>
 
                 <Button
