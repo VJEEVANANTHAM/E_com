@@ -36,6 +36,8 @@ def signup(
     data: Signup,
     db: Session = Depends(get_db)
 ):
+    print(data)
+
     hashed_password = get_password_hash(data.Password)
 
     new_user = User(
@@ -43,7 +45,6 @@ def signup(
         email=data.Email_Address,
         password=hashed_password
     )
-
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
@@ -73,7 +74,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
 @router.post("/Login")
 def login_validate(data: Login, db: Session = Depends(get_db)): 
     user = db.query(User).filter(User.email==data.email).first()
-
+    
     # print(user.email)
 
     if not user:

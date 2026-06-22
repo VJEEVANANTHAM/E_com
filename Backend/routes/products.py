@@ -28,7 +28,7 @@ def get_products(
     db: Session = Depends(get_db)
 ):
     query = db.query(Product)
-
+    print(query)
     if category:
         query = query.filter(Product.category == category)
 

@@ -184,6 +184,3 @@ async def get_products():
             status_code=504,
             detail="Third party API timeout"
         )
-    # for e in response:
-    #     print(e)
-    
